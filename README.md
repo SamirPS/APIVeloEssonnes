@@ -8,7 +8,9 @@ Pour la lancer installer FastAPI : https://fastapi.tiangolo.com/#installation et
 
 Les urls implementées pour l'instant sont :
 
-      -http://127.0.0.1:8000/proche/{rue}/{ville}/{pays} qui renvoie la position du parking le plus proche de l'adresse pour garer votre vélo
+      http://127.0.0.1:8000/proche/{rue}/{ville}/{pays}
+      Qui renvoie la position du parking le plus proche de l'adresse pour garer votre vélo
       
       
 Si vous avez des idées je suis preneur :)
+
