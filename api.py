@@ -10,6 +10,7 @@ app = FastAPI()
 f = open('a.json',) 
 data = json.load(f) 
 
+
 g=[tuple(i["fields"]["geo_point_2d"]) for i in data]
 
 @app.get("/")
@@ -27,10 +28,15 @@ async def proche(rue: str, ville:str,pays:str):
 
     
     distance=list(map(lambda a: geodesic((location.latitude, location.longitude), a).miles,g))
-
+    print(g[distance.index(min(distance))])
     location = geolocator.reverse(g[distance.index(min(distance))])
 
     return {"Position": location.address}
+
+@app.get("/info/{X}/{Y}")
+async def info(X:float, Y:float):
+    return {"error":"Connait pas "} if (X,Y) not in g else data[g.index((X,Y))]["fields"]
+
   
 
 f.close() 

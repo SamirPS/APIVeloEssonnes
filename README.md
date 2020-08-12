@@ -12,8 +12,11 @@ Les urls implementées pour l'instant sont :
       Qui renvoie la position du parking le plus proche de l'adresse pour garer votre vélo
       
       http://127.0.0.1:8000/
-      
       Vous redirige vers la doc de l'API
+
+      http://127.0.0.1:8000/info/{X}/{Y}
+      Renvoie les informations du parking si la position (X,Y) existe dans le JSon
+
       
       
 Si vous avez des idées je suis preneur :)
