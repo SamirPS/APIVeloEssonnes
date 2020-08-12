@@ -17,6 +17,10 @@ async def read_item(rue: str, ville:str,pays:str):
 
     geolocator = Nominatim(user_agent="myGeocoder")
     location = geolocator.geocode(f"{rue},{ville},{pays}")
+    if location==None:
+       
+        return {"Probleme":"On a pas trouvé la ville"}
+        
     distance=[geodesic((location.latitude, location.longitude), g[i]).miles for i in range(len(g))]
     location = geolocator.reverse(g[distance.index(min(distance))])
 
