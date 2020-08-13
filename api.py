@@ -1,6 +1,6 @@
 import json 
 from typing import Optional
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request,HTTPException
 from starlette.responses import RedirectResponse
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
@@ -23,10 +23,8 @@ async def proche(rue: str, ville:str,pays:str):
     geolocator = Nominatim(user_agent="myGeocoder")
     location = geolocator.geocode(f"{rue},{ville},{pays}")
     if location is None:
-       
-        return {"Probleme":"On a pas trouvé l'adresse "}
+        raise HTTPException(status_code=404, detail="On a pas trouvé l'adresse ")
 
-    
     distance=list(map(lambda a: geodesic((location.latitude, location.longitude), a).miles,g))
     location = geolocator.reverse(g[distance.index(min(distance))])
 
@@ -34,7 +32,9 @@ async def proche(rue: str, ville:str,pays:str):
 
 @app.get("/info/{X}/{Y}")
 async def info(X:float, Y:float):
-    return {"error":"Connait pas "} if (X,Y) not in g else data[g.index((X,Y))]["fields"]
+    if (X,Y) not in g :
+        raise HTTPException(status_code=404, detail="X,Y ne sont pas disponible dans nos données ") 
+    return data[g.index((X,Y))]["fields"]
 
 @app.get("/listpayant")
 async def listpayant():
@@ -49,6 +49,9 @@ async def adresse(X:float, Y:float):
 
     geolocator = Nominatim(user_agent="myGeocoder")
     location = geolocator.reverse((X,Y))
+    if location is None:
+        raise HTTPException(status_code=404, detail="X,Y ne sont pas bon ")
+
     return {"Position": location.address}
 
 f.close() 
