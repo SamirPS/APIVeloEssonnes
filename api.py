@@ -36,6 +36,19 @@ async def proche(rue: str, ville:str,pays:str):
 async def info(X:float, Y:float):
     return {"error":"Connait pas "} if (X,Y) not in g else data[g.index((X,Y))]["fields"]
 
-  
+@app.get("/listpayant")
+async def listpayant():
+    return {'Liste':[i["fields"]["geo_point_2d"]  for i in data if i["fields"]["payant"]!="NON"]}
+
+@app.get("/listgratuit")
+async def listgratuit():
+    return {'Liste':[i["fields"]["geo_point_2d"]  for i in data if i["fields"]["payant"]=="NON"]}
+
+@app.get("/adresse/{X}/{Y}")
+async def adresse(X:float, Y:float):
+
+    geolocator = Nominatim(user_agent="myGeocoder")
+    location = geolocator.reverse((X,Y))
+    return {"Position": location.address}
 
 f.close() 
