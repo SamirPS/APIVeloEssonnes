@@ -28,7 +28,6 @@ async def proche(rue: str, ville:str,pays:str):
 
     
     distance=list(map(lambda a: geodesic((location.latitude, location.longitude), a).miles,g))
-    print(g[distance.index(min(distance))])
     location = geolocator.reverse(g[distance.index(min(distance))])
 
     return {"Position": location.address}
