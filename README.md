@@ -2,9 +2,9 @@
 
 Ce projet est une api reposant sur le dataset suivant : https://www.data.gouv.fr/fr/datasets/stationnement-velo-en-ile-de-france-2/#_ .
 
-L'API est faite avec FastAPI : https://fastapi.tiangolo.com/#installation
+L'API est faite avec FastAPI : https://fastapi.tiangolo.com/#installation et utilise GeoPy :https://pypi.org/project/geopy/
 
-Pour la lancer installer FastAPI : https://fastapi.tiangolo.com/#installation et lancer la commande uvicorn api:app --reload
+Pour la lancer il faut installer FastAPI : https://fastapi.tiangolo.com/#installation et lancer la commande suivante : uvicorn api:app --reload
 
 Les urls implementées pour l'instant sont :
            
@@ -16,6 +16,15 @@ Les urls implementées pour l'instant sont :
 
       http://127.0.0.1:8000/info/{X}/{Y}
       Renvoie les informations du parking si la position (X,Y) existe dans le JSon
+
+      http://127.0.0.1:8000/listpayant
+      Renvoie les adresse du parking s'il est payant 
+
+      http://127.0.0.1:8000/listgratuit
+      Renvoie les adresse du parking s'il est gratuit
+
+      http://127.0.0.1:8000/adresse/{X}/{Y}
+      Renvoie l'adresse correspondant au coordonnés X,Y
 
       
       
