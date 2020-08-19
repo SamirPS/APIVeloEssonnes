@@ -1,5 +1,4 @@
 import json 
-from typing import Optional
 from fastapi import FastAPI, Request,HTTPException
 from starlette.responses import RedirectResponse
 from geopy.geocoders import Nominatim
