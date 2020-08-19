@@ -1,5 +1,5 @@
 import json 
-from fastapi import FastAPI, Request,HTTPException
+from fastapi import FastAPI,HTTPException
 from starlette.responses import RedirectResponse
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
